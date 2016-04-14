@@ -42,11 +42,15 @@ public class SpilLogikImpl implements ISpilLogik {
                     sp.setPoints(sp.getPoints()+10);
                     sp.setHarSvaretRigtigt(true);
                     this.nummerRigtigt++;
+                    if(this.antalSpillere<this.nummerRigtigt)
+                        nyRunde();
                     return true;
                 case 2:
                     sp.setPoints(sp.getPoints()+5);
                     sp.setHarSvaretRigtigt(true);
                     this.nummerRigtigt++;
+                    if(this.antalSpillere<this.nummerRigtigt)
+                        nyRunde();
                     return true;
                 default:
                     sp.setPoints(sp.getPoints()+2);

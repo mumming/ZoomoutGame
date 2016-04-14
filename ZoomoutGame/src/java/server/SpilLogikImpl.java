@@ -15,16 +15,44 @@ public class SpilLogikImpl implements ISpilLogik {
     ArrayList<Spiller> brugerListe = new ArrayList<>();
     String svar = "bummelum";
     int nummerRigtigt;
+    int antalSpillere;
+    
+    public SpilLogikImpl(){
+        this.nummerRigtigt = 1;
+        this.antalSpillere = 0;
+        this.hentSpildata();
+    }
     
     @Override
     public boolean modtagGaet(String spillerNavn, String gaet) {
         if(gaet.equals(svar)){
+            Spiller sp = new Spiller("NNNEEEIII");
+            for(Spiller s:brugerListe){
+                if(s.getNavn().equals(spillerNavn)){
+                    if(s.getHarSvaretRigtigt())
+                        return false;
+                    sp = s;
+                    break;
+                }
+            }
+            if(sp.getNavn().equals("NNNEEEIII"))
+                return false;
             switch(this.nummerRigtigt){
                 case 1:
-                    
-                    break;
+                    sp.setPoints(sp.getPoints()+10);
+                    sp.setHarSvaretRigtigt(true);
+                    this.nummerRigtigt++;
+                    return true;
+                case 2:
+                    sp.setPoints(sp.getPoints()+5);
+                    sp.setHarSvaretRigtigt(true);
+                    this.nummerRigtigt++;
+                    return true;
                 default:
+                    sp.setPoints(sp.getPoints()+2);
+                    sp.setHarSvaretRigtigt(true);
                     nyRunde();
+                    return true;
             }
         }
         return false;
@@ -39,13 +67,13 @@ public class SpilLogikImpl implements ISpilLogik {
     public boolean registrerBruger(String navn) {
         for(int i = 0; i<brugerListe.size(); i++){
             if(navn.equals(brugerListe.get(i))) {
-            return false;
-        }
-            
+                return false;
+            }
+            antalSpillere++;
         }
         return true;
     }
-
+    
     @Override
     public void hentSpildata() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -53,11 +81,13 @@ public class SpilLogikImpl implements ISpilLogik {
     
     public void nyRunde(){
         this.nummerRigtigt = 1;
+        for(Spiller s:this.brugerListe)
+            s.setHarSvaretRigtigt(false);
     }
     
     /**
      * Metode der skal kaldes når et spil er færdigt.
-     * @return String til visning med meddelelse om vinderne 
+     * @return String til visning med meddelelse om vinderne
      */
     public String afslutSpil(){
         int maxPoints = 0;

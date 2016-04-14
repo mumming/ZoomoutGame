@@ -12,10 +12,12 @@ package server;
 public class Spiller {
     private String navn;
     private int points;
+    private boolean harSvaretRigtigt;
     
     public Spiller(String navn){
         this.navn = navn;
-        points = 0;
+        this.points = 0;
+        this.harSvaretRigtigt = false;
     }
 
     /**
@@ -44,5 +46,19 @@ public class Spiller {
      */
     public void setPoints(int points) {
         this.points = points;
+    }
+
+    /**
+     * @return the harSvaretRigtigt
+     */
+    public boolean getHarSvaretRigtigt() {
+        return harSvaretRigtigt;
+    }
+
+    /**
+     * @param harSvaretRigtigt the harSvaretRigtigt to set
+     */
+    public void setHarSvaretRigtigt(boolean harSvaretRigtigt) {
+        this.harSvaretRigtigt = harSvaretRigtigt;
     }
 }

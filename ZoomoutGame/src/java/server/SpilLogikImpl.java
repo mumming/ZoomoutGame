@@ -42,6 +42,7 @@ public class SpilLogikImpl implements ISpilLogik {
                     sp.setPoints(sp.getPoints()+10);
                     sp.setHarSvaretRigtigt(true);
                     this.nummerRigtigt++;
+                    System.out.println("Jaaaaaaaaaa");
                     if(this.antalSpillere<this.nummerRigtigt)
                         nyRunde();
                     return true;
@@ -70,7 +71,7 @@ public class SpilLogikImpl implements ISpilLogik {
     @Override
     public boolean registrerBruger(String navn) {
         for(int i = 0; i<brugerListe.size(); i++){
-            if(navn.equals(brugerListe.get(i))) {
+            if(navn.equals(brugerListe.get(i).getNavn())) {
                 return false;
             }
             antalSpillere++;
@@ -80,7 +81,8 @@ public class SpilLogikImpl implements ISpilLogik {
     
     @Override
     public void hentSpildata() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //TODO lav denne
+        
     }
     
     public void nyRunde(){
